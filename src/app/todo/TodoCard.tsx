@@ -2,7 +2,7 @@
 import React from 'react';
 interface ITodoList {
   task: string;
-  onChecked?: (e: any) => void;
+  onChecked?: () => void;
   onDelete?: () => void;
 }
 const TodoCard: React.FC<ITodoList> = ({ onChecked, task, onDelete }) => {
