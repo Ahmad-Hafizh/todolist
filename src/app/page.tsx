@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-// import React from 'react';
-import { useState } from 'react';
+import React from 'react';
+import { useState, useRef } from 'react';
 import FormInput from '@/components/FormInput';
 
 const Home = () => {
+  // create ref object
+  // merefrensi ke html tujuan
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   // declare useState
   // const [count, setCount] = React.useState<number>(0);
   const [count, setCount] = useState<number>(0); //return [value, (paramValue) => {array[0]=value}]
@@ -40,12 +44,16 @@ const Home = () => {
 
   const onSave = () => {
     // spread ope
-    setData([...data, { name, age, email }]);
+    // setData([...data, { name, age, email }]);
 
     // temp method
     // const temp = [...data];
     // temp.push({ name, age, email });
     // setData(temp);
+
+    if (passwordRef.current) {
+      console.log('ref from pw input', passwordRef.current.value);
+    }
   };
   console.log(data);
 
@@ -93,6 +101,7 @@ const Home = () => {
         <FormInput type="number" label="Age" placeholder="Type your age" onChange={(e) => setAge(e.target.value)} />
         {/* <FormInput type="text" label="Email" placeholder="Type your email" onChange={onHandleEmail} /> */}
         <FormInput type="text" label="Email" placeholder="Type your email" onChange={(e) => setEmail(e.target.value)} />
+        <FormInput type="password" label="Password" placeholder="Type your Password" onChange={(e) => setEmail(e.target.value)} ref={passwordRef} />
         <button type="button" className="bg-slate-300 p-2 rounded-md" onClick={onSave}>
           Save
         </button>
